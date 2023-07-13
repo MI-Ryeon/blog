@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class CommentResponseDto extends ApiResponseDto {
     private String body;
     private String username;
+    private Integer likeComment;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
@@ -18,6 +19,7 @@ public class CommentResponseDto extends ApiResponseDto {
         super();
         this.body = comment.getBody();
         this.username = comment.getUser().getUsername();
+        this.likeComment = comment.getCommentLikes().size();
         this.createdAt = comment.getCreatedAt();
         this.modifiedAt = comment.getModifiedAt();
     }

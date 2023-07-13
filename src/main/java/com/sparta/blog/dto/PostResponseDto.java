@@ -17,15 +17,17 @@ public class PostResponseDto extends ApiResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private String username;
+    private Integer likeCount;
     private List<CommentResponseDto> comments;
 
     public PostResponseDto(Post post) {
         this.id = post.getId();
         this.title = post.getTitle();
+        this.username = post.getUser().getUsername();
         this.content = post.getContent();
+        this.likeCount = post.getPostLikes().size();
         this.createdAt = post.getCreatedAt();
         this.modifiedAt = post.getModifiedAt();
-        this.username = post.getUser().getUsername();
         this.comments = post.getComments().stream()
                 .map(CommentResponseDto::new)
                 .sorted(Comparator.comparing(CommentResponseDto::getCreatedAt).reversed()) // 작성날짜 내림차순
